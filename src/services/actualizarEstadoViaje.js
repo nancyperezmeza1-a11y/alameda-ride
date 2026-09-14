@@ -1,33 +1,27 @@
 import { db } from "../firebase/firebase";
-import { ref, update } from "firebase/database";
 
-export const actualizarEstadoViaje = async (
-  idSolicitud,
-  estado
-) => {
+import {
+  ref,
+  update
+} from "firebase/database";
 
-  try {
-
-    const solicitudRef = ref(
-      db,
-      `solicitudes/${idSolicitud}`
-    );
+export const actualizarEstadoViaje =
+  async (
+    idSolicitud,
+    estado
+  ) => {
 
     await update(
-      solicitudRef,
+
+      ref(
+        db,
+        `solicitudes/${idSolicitud}`
+      ),
+
       {
-        estado: estado
+        estado
       }
+
     );
 
-  } catch (error) {
-
-    console.log(error);
-
-    alert(
-      "Error al actualizar el estado"
-    );
-
-  }
-
-};
+  };

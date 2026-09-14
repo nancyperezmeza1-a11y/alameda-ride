@@ -8,6 +8,10 @@ import {
   onValue
 } from "firebase/database";
 
+import {
+  actualizarEstadoViaje
+} from "../services/actualizarEstadoViaje";
+
 function ViajeEnCurso() {
 
   const [viajes, setViajes] =
@@ -22,7 +26,9 @@ function ViajeEnCurso() {
       );
 
     onValue(
+
       solicitudesRef,
+
       (snapshot) => {
 
         const data =
@@ -31,17 +37,22 @@ function ViajeEnCurso() {
         if (data) {
 
           const lista =
+
             Object.keys(data)
+
               .map(
                 (key) => ({
                   id: key,
                   ...data[key]
                 })
               )
+
               .filter(
                 (item) =>
                   item.estado ===
-                  "En Curso"
+                    "Aceptado" ||
+                  item.estado ===
+                    "En Curso"
               );
 
           setViajes(
@@ -55,9 +66,30 @@ function ViajeEnCurso() {
         }
 
       }
+
     );
 
   }, []);
+
+  const iniciarViaje =
+    async (id) => {
+
+      await actualizarEstadoViaje(
+        id,
+        "En Curso"
+      );
+
+    };
+
+  const finalizarViaje =
+    async (id) => {
+
+      await actualizarEstadoViaje(
+        id,
+        "Finalizado"
+      );
+
+    };
 
   return (
 
@@ -68,7 +100,7 @@ function ViajeEnCurso() {
         <div className="logo">
 
           <h1>
-            🚗 Viajes En Curso
+            🚗 Mis Viajes
           </h1>
 
         </div>
@@ -76,7 +108,7 @@ function ViajeEnCurso() {
         {viajes.length === 0 ? (
 
           <p>
-            No existen viajes en curso.
+            No existen viajes.
           </p>
 
         ) : (
@@ -99,29 +131,25 @@ function ViajeEnCurso() {
               >
 
                 <p>
-                  👤 {viaje.nombreResidente}
+                  👤{" "}
+                  {viaje.nombreResidente}
                   {" "}
                   {viaje.apellidoResidente}
                 </p>
 
                 <p>
-                  📞 {viaje.telefonoResidente}
+                  📞{" "}
+                  {viaje.telefonoResidente}
                 </p>
 
                 <p>
-                  📍 {viaje.origen}
+                  📍{" "}
+                  {viaje.origen}
                 </p>
 
                 <p>
-                  🎯 {viaje.destino}
-                </p>
-
-                <p>
-                  🚗 {viaje.conductorPlaca}
-                </p>
-
-                <p>
-                  🎨 {viaje.conductorColor}
+                  🎯{" "}
+                  {viaje.destino}
                 </p>
 
                 <p>
@@ -130,9 +158,44 @@ function ViajeEnCurso() {
                   {viaje.estado}
                 </p>
 
+                <br />
+
+                {viaje.estado ===
+                  "Aceptado" && (
+
+                  <button
+                    className="boton"
+                    onClick={() =>
+                      iniciarViaje(
+                        viaje.id
+                      )
+                    }
+                  >
+                    ▶ Iniciar Viaje
+                  </button>
+
+                )}
+
+                {viaje.estado ===
+                  "En Curso" && (
+
+                  <button
+                    className="boton"
+                    onClick={() =>
+                      finalizarViaje(
+                        viaje.id
+                      )
+                    }
+                  >
+                    ✅ Finalizar Viaje
+                  </button>
+
+                )}
+
               </div>
 
             )
+
           )
 
         )}

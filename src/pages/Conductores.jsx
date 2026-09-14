@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
 import "../App.css";
 
-import { auth } from "../firebase/firebase";
-import { db } from "../firebase/firebase";
+import { auth, db } from "../firebase/firebase";
 
 import {
   ref,
@@ -46,12 +45,14 @@ function Conductores() {
 
           const lista =
             Object.keys(data)
+
               .map(
                 (key) => ({
                   id: key,
                   ...data[key]
                 })
               )
+
               .filter(
                 (item) =>
                   item.estado ===
@@ -114,6 +115,10 @@ function Conductores() {
 
         console.log(error);
 
+        alert(
+          "Error al aceptar viaje"
+        );
+
       }
 
     };
@@ -129,6 +134,10 @@ function Conductores() {
           <h1>
             🚘 Solicitudes Disponibles
           </h1>
+
+          <p>
+            Viajes pendientes por aceptar
+          </p>
 
         </div>
 
@@ -148,14 +157,26 @@ function Conductores() {
                 style={{
                   border:
                     "1px solid #ccc",
-                  padding:
-                    "15px",
                   borderRadius:
                     "10px",
+                  padding:
+                    "15px",
                   marginBottom:
                     "15px"
                 }}
               >
+
+                <p>
+                  👤 <strong>Residente:</strong>{" "}
+                  {solicitud.nombreResidente}
+                  {" "}
+                  {solicitud.apellidoResidente}
+                </p>
+
+                <p>
+                  📞 <strong>Teléfono:</strong>{" "}
+                  {solicitud.telefonoResidente}
+                </p>
 
                 <p>
                   📍 <strong>Origen:</strong>{" "}
@@ -183,6 +204,11 @@ function Conductores() {
                     solicitud.observaciones ||
                     "Sin observaciones"
                   }
+                </p>
+
+                <p>
+                  📌 <strong>Estado:</strong>{" "}
+                  {solicitud.estado}
                 </p>
 
                 <br />

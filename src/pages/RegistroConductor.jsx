@@ -5,6 +5,9 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase/firebase";
 
 import { guardarConductor } from "../services/conductores";
+import Buscador from "../components/Buscador";
+import { useNavigate } from "react-router-dom";
+
 
 const conjuntos = [
   "Zafiro",
@@ -42,6 +45,7 @@ const conjuntos = [
 ];
 
 function RegistroConductor() {
+  const navigate = useNavigate();
 
   const [nombre, setNombre] =
     useState("");
@@ -111,17 +115,11 @@ function RegistroConductor() {
       );
 
       alert(
-        "Conductor registrado correctamente"
-      );
+  "Conductor registrado correctamente"
+);
 
-      setNombre("");
-      setApellido("");
-      setCorreo("");
-      setTelefono("");
-      setConjunto("");
-      setPlaca("");
-      setColor("");
-      setPassword("");
+navigate("/ver-conductores");
+
 
     } catch (error) {
 
@@ -192,33 +190,13 @@ function RegistroConductor() {
           }
         />
 
-        <select
-          className="input"
-          value={conjunto}
-          onChange={(e) =>
-            setConjunto(
-              e.target.value
-            )
-          }
-        >
-
-          <option value="">
-            Seleccione su conjunto
-          </option>
-
-          {conjuntos.map(
-            (item) => (
-
-              <option
-                key={item}
-              >
-                {item}
-              </option>
-
-            )
-          )}
-
-        </select>
+        <Buscador
+        lista={conjuntos}
+        valor={conjunto}
+        setValor={setConjunto}
+        placeholder="🔍 Buscar conjunto..."
+        />
+          
 
         <input
           className="input"

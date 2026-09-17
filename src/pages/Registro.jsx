@@ -6,6 +6,8 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase/firebase";
 
 import { guardarResidente } from "../services/residentes";
+import Buscador from "../components/Buscador";
+
 
 const conjuntos = [
   "Zafiro",
@@ -145,30 +147,12 @@ function Registro() {
           }
         />
 
-        <select
-          className="input"
-          value={conjunto}
-          onChange={(e) =>
-            setConjunto(e.target.value)
-          }
-        >
-
-          <option value="">
-            Seleccione su conjunto
-          </option>
-
-          {conjuntos.map((item) => (
-
-            <option
-              key={item}
-              value={item}
-            >
-              {item}
-            </option>
-
-          ))}
-
-        </select>
+        <Buscador
+          lista={conjuntos}
+          valor={conjunto}
+          setValor={setConjunto}
+          placeholder="🔍 Buscar conjunto..."
+        />
 
         <input
           className="input"

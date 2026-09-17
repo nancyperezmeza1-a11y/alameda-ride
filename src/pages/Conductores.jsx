@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "../App.css";
 
 import { auth, db } from "../firebase/firebase";
@@ -17,6 +18,7 @@ import {
 } from "../services/obtenerConductorPorCorreo";
 
 function Conductores() {
+  const navigate = useNavigate();
 
   const [solicitudes, setSolicitudes] =
     useState([]);
@@ -102,26 +104,30 @@ function Conductores() {
     };
 
   const aceptarViaje =
-    async (idSolicitud) => {
+  async (idSolicitud) => {
 
-      try {
+    try {
 
-        await asignarConductor(
-          idSolicitud,
-          conductor
-        );
+      await asignarConductor(
+        idSolicitud,
+        conductor
+      );
 
-      } catch (error) {
+      navigate(
+        "/viaje-en-curso"
+      );
 
-        console.log(error);
+    } catch (error) {
 
-        alert(
-          "Error al aceptar viaje"
-        );
+      console.log(error);
 
-      }
+      alert(
+        "Error al aceptar viaje"
+      );
 
-    };
+    }
+
+  };
 
   return (
 

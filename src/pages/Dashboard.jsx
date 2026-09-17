@@ -146,7 +146,7 @@ function Dashboard() {
         </div>
 
         {tipoUsuario ===
-        "Residente" && (
+          "Residente" && (
 
           <>
 
@@ -176,12 +176,22 @@ function Dashboard() {
             <br />
             <br />
 
+            <Link
+              to="/historial"
+            >
+              <button
+                className="boton"
+              >
+                📚 Historial
+              </button>
+            </Link>
+
           </>
 
         )}
 
         {tipoUsuario ===
-        "Conductor" && (
+          "Conductor" && (
 
           <>
 
@@ -198,34 +208,33 @@ function Dashboard() {
             <br />
             <br />
 
+            <Link
+              to="/viaje-en-curso"
+            >
+              <button
+                className="boton"
+              >
+                🚗 Mis Viajes
+              </button>
+            </Link>
+
+            <br />
+            <br />
+
+            <Link
+              to="/historial"
+            >
+              <button
+                className="boton"
+              >
+                📚 Historial
+              </button>
+            </Link>
+
           </>
 
         )}
 
-        <Link
-          to="/viaje-en-curso"
-        >
-          <button
-            className="boton"
-          >
-            🚗 Viajes En Curso
-          </button>
-        </Link>
-
-        <br />
-        <br />
-
-        <Link
-          to="/historial"
-        >
-          <button
-            className="boton"
-          >
-            📚 Historial
-          </button>
-        </Link>
-
-        <br />
         <br />
 
         <Link

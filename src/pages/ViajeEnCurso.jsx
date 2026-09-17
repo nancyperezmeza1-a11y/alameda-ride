@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "../App.css";
 
 import { db } from "../firebase/firebase";
@@ -13,6 +14,7 @@ import {
 } from "../services/actualizarEstadoViaje";
 
 function ViajeEnCurso() {
+  const navigate = useNavigate();
 
   const [viajes, setViajes] =
     useState([]);
@@ -82,14 +84,18 @@ function ViajeEnCurso() {
     };
 
   const finalizarViaje =
-    async (id) => {
+  async (id) => {
 
-      await actualizarEstadoViaje(
-        id,
-        "Finalizado"
-      );
+    await actualizarEstadoViaje(
+      id,
+      "Finalizado"
+    );
 
-    };
+    navigate(
+      "/historial"
+    );
+
+  };
 
   return (
 

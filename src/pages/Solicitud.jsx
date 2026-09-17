@@ -12,7 +12,6 @@ import {
 } from "firebase/database";
 
 const puntos = [
-
   "Jardín del Río",
   "Muelle del Río",
   "Auto Norte Plaza",
@@ -55,13 +54,11 @@ const puntos = [
   "Risueño 1",
   "Mirla",
   "Gorrión"
-
 ];
 
 function Solicitud() {
 
-  const navigate =
-    useNavigate();
+  const navigate = useNavigate();
 
   const [origen, setOrigen] =
     useState("");
@@ -142,7 +139,7 @@ function Solicitud() {
         if (!residente) {
 
           alert(
-            "No se encontró la información del residente."
+            "No se encontró información del residente."
           );
 
           return;
@@ -202,9 +199,11 @@ function Solicitud() {
           solicitud
         );
 
-        alert(
-          "Solicitud enviada correctamente"
-        );
+        setOrigen("");
+        setDestino("");
+        setAcompanantes("0");
+        setEquipaje("No");
+        setObservaciones("");
 
         navigate(
           "/mis-solicitudes"
@@ -247,7 +246,6 @@ function Solicitud() {
             )
           }
         >
-
           <option value="">
             Seleccione origen
           </option>
@@ -276,7 +274,6 @@ function Solicitud() {
             )
           }
         >
-
           <option value="">
             Seleccione destino
           </option>
@@ -305,7 +302,6 @@ function Solicitud() {
             )
           }
         >
-
           <option value="0">
             👥 No viajo con acompañantes
           </option>
@@ -337,7 +333,6 @@ function Solicitud() {
             )
           }
         >
-
           <option value="No">
             🧳 No llevo compras ni equipaje
           </option>

@@ -29,7 +29,9 @@ function Buscador({
 
       <input
         className="input"
-        placeholder={placeholder}
+        placeholder={
+  "🚨 PRUEBA BUSCADOR 🚨"
+}
         value={valor}
         onFocus={() =>
           setMostrar(true)

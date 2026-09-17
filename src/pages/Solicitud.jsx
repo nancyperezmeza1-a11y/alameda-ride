@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "../App.css";
 
 import { guardarSolicitud } from "../services/solicitudes";
@@ -58,6 +59,9 @@ const puntos = [
 ];
 
 function Solicitud() {
+
+  const navigate =
+    useNavigate();
 
   const [origen, setOrigen] =
     useState("");
@@ -121,8 +125,8 @@ function Solicitud() {
               (key) => {
 
                 if (
-                  data[key].correo ===
-                  usuario.email
+                  data[key].uid ===
+                  usuario.uid
                 ) {
 
                   residente =
@@ -135,6 +139,16 @@ function Solicitud() {
 
         }
 
+        if (!residente) {
+
+          alert(
+            "No se encontró la información del residente."
+          );
+
+          return;
+
+        }
+
         const solicitud = {
 
           uid:
@@ -144,13 +158,16 @@ function Solicitud() {
             usuario.email,
 
           nombreResidente:
-            residente?.nombre || "",
+            residente.nombre,
 
           apellidoResidente:
-            residente?.apellido || "",
+            residente.apellido,
 
           telefonoResidente:
-            residente?.telefono || "",
+            residente.telefono,
+
+          conjunto:
+            residente.conjunto,
 
           origen,
 
@@ -167,7 +184,17 @@ function Solicitud() {
 
           fecha:
             new Date()
-              .toISOString()
+              .toISOString(),
+
+          hora:
+            new Date()
+              .toLocaleTimeString(
+                "es-CO",
+                {
+                  hour: "2-digit",
+                  minute: "2-digit"
+                }
+              )
 
         };
 
@@ -175,20 +202,12 @@ function Solicitud() {
           solicitud
         );
 
-        setOrigen("");
-
-        setDestino("");
-
-        setAcompanantes(
-          "0"
+        alert(
+          "Solicitud enviada correctamente"
         );
 
-        setEquipaje(
-          "No"
-        );
-
-        setObservaciones(
-          ""
+        navigate(
+          "/mis-solicitudes"
         );
 
       } catch (error) {
@@ -238,6 +257,7 @@ function Solicitud() {
 
               <option
                 key={item}
+                value={item}
               >
                 {item}
               </option>
@@ -266,6 +286,7 @@ function Solicitud() {
 
               <option
                 key={item}
+                value={item}
               >
                 {item}
               </option>

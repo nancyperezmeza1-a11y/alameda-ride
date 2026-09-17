@@ -1,12 +1,19 @@
 import { useState } from "react";
+import { useNavigate, Link } from "react-router-dom";
 import "../App.css";
 
-import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../firebase/firebase";
+import {
+  signInWithEmailAndPassword
+} from "firebase/auth";
 
-import { Link } from "react-router-dom";
+import {
+  auth
+} from "../firebase/firebase";
 
 function Login() {
+
+  const navigate =
+    useNavigate();
 
   const [correo, setCorreo] =
     useState("");
@@ -25,8 +32,7 @@ function Login() {
           password
         );
 
-        window.location.href =
-          "/dashboard";
+        navigate("/dashboard");
 
       } catch (error) {
 
@@ -101,7 +107,8 @@ function Login() {
         <Link
           to="/registro"
           style={{
-            textDecoration: "none"
+            textDecoration:
+              "none"
           }}
         >
           <button

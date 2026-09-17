@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "../App.css";
 
 import { createUserWithEmailAndPassword } from "firebase/auth";
@@ -43,6 +44,8 @@ const conjuntos = [
 
 function Registro() {
 
+  const navigate = useNavigate();
+
   const [nombre, setNombre] = useState("");
   const [apellido, setApellido] = useState("");
   const [correo, setCorreo] = useState("");
@@ -69,19 +72,19 @@ function Registro() {
         telefono,
         conjunto,
         foto: "",
-        fechaRegistro: new Date().toISOString()
+        fechaRegistro:
+          new Date().toISOString()
       };
 
-      await guardarResidente(residente);
+      await guardarResidente(
+        residente
+      );
 
-      alert("Residente registrado correctamente");
+      alert(
+        "Residente registrado correctamente"
+      );
 
-      setNombre("");
-      setApellido("");
-      setCorreo("");
-      setTelefono("");
-      setConjunto("");
-      setPassword("");
+      navigate("/login");
 
     } catch (error) {
 
@@ -94,26 +97,33 @@ function Registro() {
   };
 
   return (
+
     <div className="contenedor">
 
       <div className="card">
 
         <div className="logo">
-          <h1>🏢 Registro Residente</h1>
+          <h1>
+            🏢 Registro Residente
+          </h1>
         </div>
 
         <input
           className="input"
           placeholder="Primer nombre"
           value={nombre}
-          onChange={(e) => setNombre(e.target.value)}
+          onChange={(e) =>
+            setNombre(e.target.value)
+          }
         />
 
         <input
           className="input"
           placeholder="Primer apellido"
           value={apellido}
-          onChange={(e) => setApellido(e.target.value)}
+          onChange={(e) =>
+            setApellido(e.target.value)
+          }
         />
 
         <input
@@ -121,29 +131,41 @@ function Registro() {
           type="email"
           placeholder="Correo electrónico"
           value={correo}
-          onChange={(e) => setCorreo(e.target.value)}
+          onChange={(e) =>
+            setCorreo(e.target.value)
+          }
         />
 
         <input
           className="input"
           placeholder="Número celular"
           value={telefono}
-          onChange={(e) => setTelefono(e.target.value)}
+          onChange={(e) =>
+            setTelefono(e.target.value)
+          }
         />
 
         <select
           className="input"
           value={conjunto}
-          onChange={(e) => setConjunto(e.target.value)}
+          onChange={(e) =>
+            setConjunto(e.target.value)
+          }
         >
+
           <option value="">
             Seleccione su conjunto
           </option>
 
           {conjuntos.map((item) => (
-            <option key={item}>
+
+            <option
+              key={item}
+              value={item}
+            >
               {item}
             </option>
+
           ))}
 
         </select>
@@ -153,13 +175,9 @@ function Registro() {
           type="password"
           placeholder="Contraseña"
           value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-
-        <input
-          className="input"
-          type="file"
-          disabled
+          onChange={(e) =>
+            setPassword(e.target.value)
+          }
         />
 
         <button
@@ -172,7 +190,9 @@ function Registro() {
       </div>
 
     </div>
+
   );
+
 }
 
 export default Registro;

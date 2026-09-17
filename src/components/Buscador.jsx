@@ -7,18 +7,16 @@ function Buscador({
   placeholder
 }) {
 
-  const [mostrar,
-    setMostrar] =
+  const [mostrar, setMostrar] =
     useState(false);
 
   const filtrados =
-    lista.filter(
-      (item) =>
-        item
-          .toLowerCase()
-          .includes(
-            valor.toLowerCase()
-          )
+    lista.filter((item) =>
+      item
+        .toLowerCase()
+        .includes(
+          valor.toLowerCase()
+        )
     );
 
   return (
@@ -28,29 +26,41 @@ function Buscador({
     >
 
       <input
+        type="text"
         className="input"
-        placeholder={
-  "🚨 PRUEBA BUSCADOR 🚨"
-}
+        placeholder={placeholder}
         value={valor}
-        onFocus={() =>
+        onClick={() =>
           setMostrar(true)
         }
-        onChange={(e) =>
+        onChange={(e) => {
+
           setValor(
             e.target.value
-          )
-        }
+          );
+
+          setMostrar(true);
+
+        }}
       />
 
-      {mostrar &&
-        valor !== "" && (
+      {mostrar && (
 
-          <div
-            className="buscador-lista"
-          >
+        <div
+          className="buscador-lista"
+        >
 
-            {filtrados.map(
+          {filtrados.length === 0 ? (
+
+            <div
+              className="buscador-item"
+            >
+              Sin resultados
+            </div>
+
+          ) : (
+
+            filtrados.map(
               (item) => (
 
                 <div
@@ -70,9 +80,11 @@ function Buscador({
                 </div>
 
               )
-            )}
+            )
 
-          </div>
+          )}
+
+        </div>
 
       )}
 

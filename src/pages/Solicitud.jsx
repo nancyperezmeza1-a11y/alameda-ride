@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Buscador from "../components/Buscador";
 import "../App.css";
 
 import { guardarSolicitud } from "../services/solicitudes";
@@ -237,61 +238,19 @@ function Solicitud() {
 
         </div>
 
-        <select
-          className="input"
-          value={origen}
-          onChange={(e) =>
-            setOrigen(
-              e.target.value
-            )
-          }
-        >
-          <option value="">
-            Seleccione origen
-          </option>
+        <Buscador
+          lista={puntos}
+          valor={origen}
+          setValor={setOrigen}
+          placeholder="🔍 Seleccione origen"
+        />
 
-          {puntos.map(
-            (item) => (
-
-              <option
-                key={item}
-                value={item}
-              >
-                {item}
-              </option>
-
-            )
-          )}
-
-        </select>
-
-        <select
-          className="input"
-          value={destino}
-          onChange={(e) =>
-            setDestino(
-              e.target.value
-            )
-          }
-        >
-          <option value="">
-            Seleccione destino
-          </option>
-
-          {puntos.map(
-            (item) => (
-
-              <option
-                key={item}
-                value={item}
-              >
-                {item}
-              </option>
-
-            )
-          )}
-
-        </select>
+        <Buscador
+          lista={puntos}
+          valor={destino}
+          setValor={setDestino}
+          placeholder="🔍 Seleccione destino"
+        />
 
         <select
           className="input"

@@ -131,3 +131,28 @@ hr{
   }
 
 }
+.buscador-container{
+  position:relative;
+  width:100%;
+}
+
+.buscador-lista{
+  max-height:200px;
+  overflow-y:auto;
+  border:1px solid #d8d8d8;
+  border-top:none;
+  border-radius:0 0 10px 10px;
+  background:white;
+  margin-top:-15px;
+  margin-bottom:15px;
+}
+
+.buscador-item{
+  padding:12px;
+  cursor:pointer;
+  border-bottom:1px solid #f1f1f1;
+}
+
+.buscador-item:hover{
+  background:#eaf6ee;
+}
